@@ -18,3 +18,4 @@
    | HashMap使用键（Key）计算Hashcode | HashSet使用成员对象来计算hashcode值，对于两个对象来说hashcode可能相同，所以equals()方法用来判断对象的相等性， |
 
 15. Comparable和Comparator的区别：前者用于实现让类获得可排序的性质，后者是定制化排序器。
+
