@@ -5,6 +5,9 @@
     "sub_directories": [
         {
             "name": "base"
+        },
+        {
+            "name": "framework"
         }
     ],
     "version": "1"

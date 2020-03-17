@@ -26,7 +26,7 @@ Vector的所有方法都是同步的。
 - 以无参构造实例化`ArrayList`时，初始化的是一个空数组，在调用`add()`时才真正分配并扩容为10(default)。
 - 扩容逻辑伪代码：
 ```
-minCapacity = size + n
+minCapacity = size + 1
 if minCapacity > currentCapacity
     //开始扩容
 newCapacity = currentCapacity * 1.5
@@ -36,7 +36,7 @@ if newCapacity > MAX_ARRAY_SIZE  // MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8
    newCapacity = minCapacity > MAX_ARRAY_SIZE ? Integer.MAX_VALUE : MAX_ARRAY_SIZE
 // 调用Arrays.copyOf()扩容
 ```
-- `ArrayList`中的`ensureCapacity(int)`可以减少添加元素时扩容的次数，最好在添加大量元素之前调用；`trimToSize()`可以将list容量缩减到实际大小。
+- `ArrayList`中的`ensureCapacity(int)`可以直接使容器扩容以确保能容纳指定大小，最好在添加大量元素之前调用，以减少添加元素时扩容的次数；`trimToSize()`可以将list容量缩减到实际大小。
 
 ## HashMap和HashTable的区别
 
