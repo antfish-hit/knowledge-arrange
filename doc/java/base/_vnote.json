@@ -1,0 +1,34 @@
+{
+    "created_time": "2020-03-30T01:41:21Z",
+    "files": [
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2020-03-30T01:41:21Z",
+            "modified_time": "2020-03-30T01:41:21Z",
+            "name": "Java基础知识梳理.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2020-03-30T01:41:21Z",
+            "modified_time": "2020-03-30T01:41:21Z",
+            "name": "Java容器知识梳理.md",
+            "tags": [
+            ]
+        }
+    ],
+    "sub_directories": [
+        {
+            "name": "collections"
+        },
+        {
+            "name": "concurrent"
+        }
+    ],
+    "version": "1"
+}
