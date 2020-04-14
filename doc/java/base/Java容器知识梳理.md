@@ -3,8 +3,8 @@
 ## List、Set、Map的区别
 
 - List：存储一组可重复对象的集合
-- Set：不重复存储集合(根据元素hashCode判断)
-- Map：键值对存储字典，以key的hashCode判断重复
+- Set：不重复存储集合(先根据元素hashCode判断，若相等再根据equals()判断)
+- Map：键值对存储字典，以key的hashCode判断重复，若相等再根据equals()判断
 
 ## Arraylist 与 LinkedList 区别
 
