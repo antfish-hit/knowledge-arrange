@@ -79,7 +79,7 @@ X-XSS-Protection: 1; mode=block
 - `Content-Security-Policy: script-srchttps://trustedscripts.example.com; report-uri /csp-reportendpoint/`: 只允许加载指定来源的脚本，并将违规行为报告至指定服务接口。
 - `Content-Security-Policy-Report-Only: script-src 'self'https://trustedscripts.example.com; report-uri /csp-reportendpoint/`: 将违规行为报告至指定服务接口但不限制加载违规脚本。
 - `Referrer-Policy: same-origin`: 当用户在浏览器上点击一个链接时，会产生一个 HTTP 请求，用于获取新的页面内容，而在该请求的报头中，会包含一个`Referrer`，用以指定该请求是从哪个页面跳转页来的，常被用于分析用户来源等信息。[^1]
--`Clear-site-Data: "cache"，"cookies""storage"executionContexts"`: 用于当返回的响应包含该响应头时，清理浏览器存储的数据，例如cookie，local storage。
+- `Clear-site-Data: "cache"，"cookies""storage"executionContexts"`: 用于当返回的响应包含该响应头时，清理浏览器存储的数据，例如cookie，local storage。
 
 ```java
 @Configuration
