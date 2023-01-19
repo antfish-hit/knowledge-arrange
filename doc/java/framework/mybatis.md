@@ -18,11 +18,6 @@
 - #{}：预编译处理，Mybatis 在处理#{}时，会将 sql 中的#{}替换为?号，调用 `PreparedStatement` 的set 方法来赋值。
 - ${}：字符串替换，会引入SQL注入问题。
 
-## Mybatis 是如何进行分页的？分页插件的原理是什么
-
-Mybatis 使用 RowBounds 对象进行分页，它是针对 ResultSet 结果集执行的内存分页，而非物理分页，可以在 sql 内直接书写带有物理分页的参数来完成物理分页功能，也可以使用分页插件来完成物理分页。
-分页插件的基本原理是使用 Mybatis 提供的插件接口，实现自定义插件，在插件的拦截方法内拦截待执行的 sql，然后重写 sql，根据 dialect 方言，添加对应的物理分页语句和物理分页参数。
-
 ## 简述 Mybatis 的插件运行原理，以及如何编写一个插件
 Mybatis 仅可以编写针对 ParameterHandler、ResultSetHandler、StatementHandler、Executor 这 4 种接口的插件，Mybatis 使用 JDK 的动态代理，为需要拦截的接口生成代理对象以实现接口方法拦截功能，每当执行这 4 种接口对象的方法时，就会进入拦截方法，具体就是 InvocationHandler 的 invoke()方法，当然，只会拦截那些你指定需要拦截的方法。
 实现 Mybatis 的 Interceptor 接口并复写intercept()方法，然后在给插件编写注解，指定要拦截哪一个接口的哪些方法即可，还要在配置文件中配置编写的插件。

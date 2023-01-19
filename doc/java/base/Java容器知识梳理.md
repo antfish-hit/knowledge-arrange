@@ -6,6 +6,20 @@
 - Set：不重复存储集合(先根据元素hashCode判断，若相等再根据equals()判断)
 - Map：键值对存储字典，以key的hashCode判断重复，若相等再根据equals()判断
 
+### 集合框架底层数据结构总结
+
+- List
+    - `ArrayList`：`Object[]`数组
+    - `LinkedList`：双向链表
+- Set
+    - `HashSet`（无序，唯一）：基于`HashMap`实现的，底层采用`HashMap`来保存元素
+    - `LinkedHashSet`：`LinkedHashSet`是`HashSet`的子类，并且其内部是通过`LinkedHashMap`来实现的
+    - `TreeSet`（有序，唯一）：基于`TreeMap`实现的
+- Map
+    - `HashMap`：JDK1.8之前`HashMap`由**数组+链表**组成的，数组是`HashMap`的主体，链表则是主要**为了解决哈希冲突而存在**的（“拉链法”解决冲突）。JDK1.8以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（**默认为8**）（**将链表转换成红黑树前会判断，如果当前数组的长度小于64，那么会选择先进行数组扩容，而不是转换为红黑树**）时，将链表转化为红黑树，以减少搜索时间
+    - `LinkedHashMap`：`LinkedHashMap`继承自`HashMap`，所以它的底层仍然是基于拉链式散列结构即由数组和链表或红黑树组成。另外，`LinkedHashMap`在上面结构的基础上，增加了一条双向链表，使得上面的结构可以保持键值对的插入顺序。同时通过对链表进行相应的操作，实现了访问顺序相关逻辑。
+    - `TreeMap`：红黑树
+
 ## Arraylist 与 LinkedList 区别
 
 - 都是线程不安全的。
@@ -17,9 +31,6 @@
 
 - 实现了`RandomAccess`接口的list，优先选择普通`for`循环 ，其次`foreach`。
 - 未实现`RandomAccess`接口的list，优先选择`iterator`遍历（`foreach`遍历底层也是通过`iterator`实现的,），大size的数据，千万不要使用普通for循环。
-
-## ArrayList与Vector的区别
-Vector的所有方法都是同步的。
 
 ## ArrayList源码解析
 
@@ -37,15 +48,6 @@ if newCapacity > MAX_ARRAY_SIZE  // MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8
 // 调用Arrays.copyOf()扩容
 ```
 - `ArrayList`中的`ensureCapacity(int)`可以直接使容器扩容以确保能容纳指定大小，最好在添加大量元素之前调用，以减少添加元素时扩容的次数；`trimToSize()`可以将list容量缩减到实际大小。
-
-## HashMap和HashTable的区别
-
-- `HashMap`非线程安全，`HashTable`线程安全。
-- `HashMap`支持key为`null`，`HashTable`不支持key or value为`null`。
-- 不指定`initCapacity`时，`initCapacity` = `defaultCapacity`，`HashTable`的`defaultCapacity`为`11`，之后每次扩容都是`newCapacity = currentCapacity * 2 + 1`；`HashMap`的`defaultCapacity`为`16`，之后每次扩容都是`newCapacity = currentCapacity * 2`。
-- 指定`initCapacity`时，`HashTable`直接用`initCapacity`，`HashMap`则将其扩充为`2`的幂次方大小。
-- JDK1.8前，`HashMap`底层实现是**链表数组**，JDK1.8后，当链表长度大于阈值(默认为`8`)时,将链表转为**红黑树**。
-- `HashMap`中的参数`loadFactor`默认值为`0.75`，是控制数组存放数据的疏密程度，越接近1越密，元素查找效率越低；越接近0越疏，数组利用率越低。
 
 ## ConcurrentHashMap实现线程安全的方式
 
