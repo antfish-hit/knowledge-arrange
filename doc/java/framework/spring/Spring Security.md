@@ -388,7 +388,7 @@ SwitchUserFilter
 #### Saving Requests Between Authentication
 
 - `RequestCacheAwareFilter`将`HttpServletRequest`保存在`RequestCache`中。当用户成功验证后，将会使用`RequestCache`重新响应原始请求。
-- `RequestCache`的默认实现是`HttpSessionRequestCache`，缓存请求时，会将其对应的`match parameter name`设置为`continue`，`session attribute name`设置为`SPRING_SECURITY_SAVED_RE        QUEST`；当获取缓存的请求时，同样会检查session中是否有key相同的request。
+- `RequestCache`的默认实现是`HttpSessionRequestCache`，缓存请求时，会将其对应的`match parameter name`设置为`continue`，`session attribute name`设置为`SPRING_SECURITY_SAVED_REQUEST`；当获取缓存的请求时，同样会检查session中是否有key相同的request。
 
 ```java
 // HttpSessionReguestcache
