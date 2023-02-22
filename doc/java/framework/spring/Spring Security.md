@@ -2,26 +2,6 @@
 
 文档基于6.0.1版本撰写。
 
-- [Spring Security](#spring-security)
-  - [Features](#features)
-    - [Authentication](#authentication)
-    - [Protection Against Exploits](#protection-against-exploits)
-      - [CSRF](#csrf)
-      - [HTTP Headers](#http-headers)
-    - [Integrations](#integrations)
-      - [Cryptography](#cryptography)
-      - [Spring Data](#spring-data)
-      - [Java's Concurrency APIs](#javas-concurrency-apis)
-  - [Servlet Applications](#servlet-applications)
-    - [Architecture](#architecture)
-      - [FilterChain](#filterchain)
-      - [DelegatingFilterProxy](#delegatingfilterproxy)
-      - [FilterChainProxy](#filterchainproxy)
-      - [SecurityFilterChain](#securityfilterchain)
-      - [Security Filters](#security-filters)
-      - [Handling Security Exceptions](#handling-security-exceptions)
-      - [Saving Requests Between Authentication](#saving-requests-between-authentication)
-
 ## Features
 
 ### Authentication
