@@ -411,4 +411,122 @@ DefaultSecurityFilterChain springSecurity(HttpSecurity http) throws Exception {
 }
 ```
 
+### Authentication
+
+#### Authentication Architecture
+
+##### Servlet Authentication Architecture
+
+- `SecurityContextHolder`：`SecurityContextHolder`是Spring Security用来存储已认证用户信息的地方。
+- `SecurityContext`：可以通过`SecurityContextHolder`获取，包含了当前已认证用户的信息。
+- `Authentication`：既可以作为用户凭据传给`AuthenticationManager`对用户进行认证，也可以代表从`SecurityContext`获取的当前用户。
+- `GrantedAuthority`：系统为`Authentication`中当前用户赋予的权限(例如role，scope等)。
+- `AuthenticationManager`：定义Spring Security Filters具体认证逻辑的接口。
+- `ProviderManager`：`AuthenticationManager`的通用实现。
+- `AuthenticationProvider`：被`ProviderManager`用来针对特定方式进行认证的接口。
+- `Request Credentials with AuthenticationEntryPoint`：用来向客户端请求认证信息的接口(例如重定向到登录页面，发送带有`WWW-Authenticate`请求头的相应等)。
+- `AbstractAuthenticationProcessingFilter`：权限认证的基础`Filter`，为上层验证流程以及相互之间的合作方式提供了很好的思路。
+
+##### SecurityContextHolder
+
+![](vx_images/212492716241701.png)
+
+- `SecurityContextHolder`是Spring Security认证模型的核心，它包含了`SecurityContext`。
+- Spring Security不关心`SecurityContextHolder`是如何构成的，只要它有值，该值就代表当前已认证的用户。
+
+```java
+// 表示用户已认证的最简单的方法就是直接给SecurityContextHolder赋值
+SecurityContext context = SecurityContextHolder.createEmptyContext();
+Authentication authentication =
+    new TestingAuthenticationToken("username", "password", "ROLE_USER");
+context.setAuthentication(authentication);
+
+SecurityContextHolder.setContext(context);
+
+// 获取当前已认证用户的信息
+SecurityContext context = SecurityContextHolder.getContext();
+Authentication authentication = context.getAuthentication();
+String username = authentication.getName();
+Object principal = authentication.getPrincipal();
+Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+```
+
+- 默认情况下，`SecurityContextHolder`使用`ThreadLocal`存储认证信息，即在同一线程下运行的所有方法都可以在不显式传参的情况下获取`SecurityContext`。
+- 同时Spring Security的`FilterChainProxy`会在完成请求后清理认证信息以确保安全。
+-可以针对不用的情况对`SecurityContextHolder`存储认证信息的策略进行配置：
+
+```java
+// 源码
+public class SecurityContextHolder {
+
+	public static final String MODE_THREADLOCAL = "MODE_THREADLOCAL";
+
+	public static final String MODE_INHERITABLETHREADLOCAL = "MODE_INHERITABLETHREADLOCAL";
+
+	public static final String MODE_GLOBAL = "MODE_GLOBAL";
+
+	private static final String MODE_PRE_INITIALIZED = "MODE_PRE_INITIALIZED";
+
+	public static final String SYSTEM_PROPERTY = "spring.security.strategy";
+
+	private static String strategyName = System.getProperty(SYSTEM_PROPERTY);
+
+	private static SecurityContextHolderStrategy strategy;
+
+	private static int initializeCount = 0;
+
+	static {
+		initialize();
+	}
+
+	private static void initialize() {
+		initializeStrategy();
+		initializeCount++;
+	}
+
+	private static void initializeStrategy() {
+		if (MODE_PRE_INITIALIZED.equals(strategyName)) {
+			Assert.state(strategy != null, "When using " + MODE_PRE_INITIALIZED
+					+ ", setContextHolderStrategy must be called with the fully constructed strategy");
+			return;
+		}
+		if (!StringUtils.hasText(strategyName)) {
+			// Set default
+			strategyName = MODE_THREADLOCAL;
+		}
+		if (strategyName.equals(MODE_THREADLOCAL)) {
+			strategy = new ThreadLocalSecurityContextHolderStrategy();
+			return;
+		}
+		if (strategyName.equals(MODE_INHERITABLETHREADLOCAL)) {
+			strategy = new InheritableThreadLocalSecurityContextHolderStrategy();
+			return;
+		}
+		if (strategyName.equals(MODE_GLOBAL)) {
+			strategy = new GlobalSecurityContextHolderStrategy();
+			return;
+		}
+		// Try to load a custom strategy
+		try {
+			Class<?> clazz = Class.forName(strategyName);
+			Constructor<?> customStrategy = clazz.getConstructor();
+			strategy = (SecurityContextHolderStrategy) customStrategy.newInstance();
+		}
+		catch (Exception ex) {
+			ReflectionUtils.handleReflectionException(ex);
+		}
+	}
+	...
+}
+```
+
+##### Authentication
+
+- `Authentication`接口主要用于两个方面：
+    - 作为用户凭据传给`AuthenticationManager`对用户进行认证。此时，`isAuthenticated()`返回`false`。
+    - 代表当前已认证用户，可通过`SecurityContext`获取。
+- `Authentication`包含以下几部分：
+    - `principal`：代表用户。当通过用户名/密码的方式进行认证时通常是`UserDetails`的实例对象。
+    - `credentials`：通常是密码。
+
 [^1]: [Referrer Policy 介绍](https://www.cnblogs.com/caixw/p/referrer-policy.html)
