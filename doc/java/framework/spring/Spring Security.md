@@ -527,6 +527,25 @@ public class SecurityContextHolder {
     - 代表当前已认证用户，可通过`SecurityContext`获取。
 - `Authentication`包含以下几部分：
     - `principal`：代表用户。当通过用户名/密码的方式进行认证时通常是`UserDetails`的实例对象。
-    - `credentials`：通常是密码。
+    - `credentials`：通常是密码，多数情况会在用户认证完清空。
+    - `authorities`：`GrantedAuthority`实例对象的集合，代表用户的权限，比如role，scope。
+
+##### GrantedAuthority
+
+- 可通过`Authentication.getAuthorities()`方法获得`GrantedAuthority`的实例对象集合。通常情况下被当做“roles”(比如`ROLE_ADMINISTRATOR`)，用作之后的认证。
+- 当使用基于用户名/密码的认证方式时，一般是通过`UserDetailsService`加载`GrantedAuthority`。
+
+##### ProviderManager
+
+![](vx_images/226991217230343.png)
+
+- `ProviderManager`是`AuthenticationManager`最通用的实现，它将实际认证流程委托给了一个`AuthenticationProvider`集合。每个`AuthenticationProvider`都有机会表明认证是否成功或需要委托给下一个`AuthenticationProvider`。如果没有配置任何`AuthenticationProvider`，就会抛出`ProviderNotFoundException`异常，表示没有支持当前`Authentication`类型的`ProviderManager`，并将认证结果标记为失败。这样做可以在只配置一个`AuthenticationManager`的同时，支持多种认证方式。
+
+![](vx_images/117832017248769.png)
+![](vx_images/535412517256802.png)
+
+- `ProviderManager`可以配置一个可选的父`AuthenticationManager`，作为没有`AuthenticationProvider`可以进行认证的替代方案，通常就是`ProviderManager`实例。
+- 多个`ProviderManager`也许会共享同一个父`AuthenticationManager`，但认证逻辑各不相同。
+- 默认情况下，`ProviderManager`会清除成功认证后返回的`Authentication`包含的敏感信息，比如密码。但是这种做法在使用缓存的场景下会导致问题。当`Authentication`引用了缓存对象时，默认的清除行为会导致缓存对象不可再用于认证。解决这个问题最直接的方法就是对传递的对象进行拷贝，或者将`ProviderManager`中的`eraseCredentialsAfterAuthentication`设置为`false`。
 
 [^1]: [Referrer Policy 介绍](https://www.cnblogs.com/caixw/p/referrer-policy.html)
