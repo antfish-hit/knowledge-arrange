@@ -548,4 +548,59 @@ public class SecurityContextHolder {
 - 多个`ProviderManager`也许会共享同一个父`AuthenticationManager`，但认证逻辑各不相同。
 - 默认情况下，`ProviderManager`会清除成功认证后返回的`Authentication`包含的敏感信息，比如密码。但是这种做法在使用缓存的场景下会导致问题。当`Authentication`引用了缓存对象时，默认的清除行为会导致缓存对象不可再用于认证。解决这个问题最直接的方法就是对传递的对象进行拷贝，或者将`ProviderManager`中的`eraseCredentialsAfterAuthentication`设置为`false`。
 
+##### AuthenticationProvider
+
+- 每个`AuthenticationProvider`代表一种认证方式，`AuthenticationProvider`对象集合是构造`ProviderManager`对象的必要条件。
+
+```java
+    // ProviderManager源码
+    public ProviderManager(AuthenticationProvider... providers) {
+		this(Arrays.asList(providers), null);
+	}
+
+	/**
+	 * Construct a {@link ProviderManager} using the given {@link AuthenticationProvider}s
+	 * @param providers the {@link AuthenticationProvider}s to use
+	 */
+	public ProviderManager(List<AuthenticationProvider> providers) {
+		this(providers, null);
+	}
+
+	/**
+	 * Construct a {@link ProviderManager} using the provided parameters
+	 * @param providers the {@link AuthenticationProvider}s to use
+	 * @param parent a parent {@link AuthenticationManager} to fall back to
+	 */
+	public ProviderManager(List<AuthenticationProvider> providers, AuthenticationManager parent) {
+		Assert.notNull(providers, "providers list cannot be null");
+		this.providers = providers;
+		this.parent = parent;
+		checkState();
+	}
+
+	@Override
+	public void afterPropertiesSet() {
+		checkState();
+	}
+
+	private void checkState() {
+		Assert.isTrue(this.parent != null || !this.providers.isEmpty(),
+				"A parent AuthenticationManager or a list of AuthenticationProviders is required");
+		Assert.isTrue(!CollectionUtils.contains(this.providers.iterator(), null),
+				"providers list cannot contain null values");
+	}
+```
+
+##### Request Credentials with AuthenticationEntryPoint
+
+- `AuthenticationEntryPoint`是用来向client端索取认证凭据的，具体实现可以是重定向到登录界面，带有`WWW-Authenticate`请求头的响应或者其他行为。
+
+##### AbstractAuthenticationProcessingFilter
+
+- `AbstractAuthenticationProcessingFilter`是用于认证用户凭据的基础`Filter`。在认证之前，通常会通过`AuthenticationEntryPoint`请求凭据。
+
+![](vx_images/375592515230360.png)
+
+1. 
+
 [^1]: [Referrer Policy 介绍](https://www.cnblogs.com/caixw/p/referrer-policy.html)
