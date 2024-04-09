@@ -1,0 +1,165 @@
+{
+  "main": {
+    "id": "51b470d7095e385b",
+    "type": "split",
+    "children": [
+      {
+        "id": "71ff471e27f2338d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5b4d2569fb8d2a64",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "doc/java/base/Java容器知识梳理.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "e3f855f1bb4b5f73",
+    "type": "split",
+    "children": [
+      {
+        "id": "7172e37f5406069c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e986dad0758a31fb",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "017e62daf8c0a4d5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "57ecc9010615fea2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "89a75fa6a5557fab",
+    "type": "split",
+    "children": [
+      {
+        "id": "b358a65016bdf5b5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "49ea5f4a70f7deed",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "doc/java/base/Java容器知识梳理.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "1c0f373e49354258",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "doc/java/base/Java容器知识梳理.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "63bca52d156da443",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "8c1a8a4d6e25f3f4",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "doc/java/base/Java容器知识梳理.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "5b4d2569fb8d2a64",
+  "lastOpenFiles": [
+    "vx_recycle_bin/20240409/20191211204001886_30728.jpg",
+    "vx_recycle_bin/20240409/20191203211614843_12834.png",
+    "vx_recycle_bin/20240409/20191203211550972_5337.png",
+    "vx_recycle_bin/20240409/20191203211518938_26681.png",
+    "vx_recycle_bin/20240409",
+    "doc/java/base/vx_images/562735214240450.png",
+    "doc/java/base/_v_images/20191203211518938_26681.png",
+    "doc/java/base/_v_images/20191203211614843_12834.png",
+    "doc/java/base/_v_images/20191219220400669_8836.png",
+    "doc/java/base/_v_images/20210209160950698_339.png",
+    "doc/java/base/_v_images/20200326222652828_26512.png",
+    "doc/java/base/_v_images/20200229190517708_28889.png",
+    "doc/java/base/Java基础知识梳理.md"
+  ]
+}
