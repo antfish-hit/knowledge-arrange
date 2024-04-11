@@ -148,6 +148,7 @@
   },
   "active": "5b4d2569fb8d2a64",
   "lastOpenFiles": [
+    "vx_notebook/notebook.db-journal",
     "vx_recycle_bin/20240409/20191211204001886_30728.jpg",
     "vx_recycle_bin/20240409/20191203211614843_12834.png",
     "vx_recycle_bin/20240409/20191203211550972_5337.png",
@@ -159,7 +160,6 @@
     "doc/java/base/_v_images/20191219220400669_8836.png",
     "doc/java/base/_v_images/20210209160950698_339.png",
     "doc/java/base/_v_images/20200326222652828_26512.png",
-    "doc/java/base/_v_images/20200229190517708_28889.png",
     "doc/java/base/Java基础知识梳理.md"
   ]
 }
