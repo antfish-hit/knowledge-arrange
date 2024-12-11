@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "idea.md",
+                "file": "doc/tool/idea.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "idea.md",
+                "file": "doc/tool/idea.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "idea.md",
+                "file": "doc/tool/idea.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "idea.md"
+                "file": "doc/tool/idea.md"
               }
             }
           }
@@ -146,9 +146,9 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "de1ed59458488889",
+  "active": "e986dad0758a31fb",
   "lastOpenFiles": [
-    "idea.md",
+    "doc/tool/idea.md",
     "doc/tool",
     "doc/java/base/_v_images/20191219215401827_31512.png",
     "assert/java/base/collections/ConcurrentHashMap分段锁.jpg",
