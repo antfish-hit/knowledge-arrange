@@ -4,9 +4,10 @@
 
 - List
     - `ArrayList`：`Object[]`数组
+    - `LinkedList`：双向链表
 - Set
     - `HashSet`（无序，唯一）：基于`HashMap`实现。
-    - `LinkedHashSet`有序，唯一）：基于`LinkedHashMap`实现。
+    - `LinkedHashSet`（有序，唯一）：基于`LinkedHashMap`实现。
     - `TreeSet`（有序，唯一）：基于`TreeMap`实现。
 - Map
     - `HashMap`：当链表长度大于阈值（**默认为8**）（**将链表转换成红黑树前会判断，如果当前数组的长度小于64，那么会选择先进行数组扩容，而不是转换为红黑树**）时，将链表转化为红黑树，以减少搜索时间，每次扩容为当前大小的2倍。
