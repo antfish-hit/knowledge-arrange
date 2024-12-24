@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "doc/tool/idea.md",
+                "file": "doc/java/framework/spring/spring.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "doc/tool/idea.md",
+                "file": "doc/java/framework/spring/spring.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "doc/tool/idea.md",
+                "file": "doc/java/framework/spring/spring.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "doc/tool/idea.md"
+                "file": "doc/java/framework/spring/spring.md"
               }
             }
           }
@@ -146,8 +146,11 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "e986dad0758a31fb",
+  "active": "de1ed59458488889",
   "lastOpenFiles": [
+    "Pasted image 20241224160252.png",
+    "doc/java/framework/spring/spring.md",
+    "doc/java/framework/spring/AOP.md",
     "doc/tool/idea.md",
     "doc/tool",
     "doc/java/base/_v_images/20191219215401827_31512.png",
@@ -173,7 +176,6 @@
     "doc/java/base/Java容器知识梳理.md",
     "doc/java/base/_v_attachments/413113515240457",
     "doc/java/base/_v_attachments",
-    "vx_recycle_bin/20240409/20191211204001886_30728.jpg",
     "vx_recycle_bin/20240409"
   ]
 }
