@@ -1,8 +1,6 @@
-# Spring Boot
+## 简介
 Spring Boot 是基于自Spring4开始有的条件注册的一套快速开发整合包。
-
-## Spring Boot的优点
-
+## 优点
 - 集成了多种默认配置，提高了开发效率。
 - 使用依赖注解方式的`JavaConfig`可以避免复杂的XML配置。
 - 内置嵌入式HTTP服务器，可以轻松地开发和测试Web程序。
@@ -11,13 +9,9 @@ Spring Boot 是基于自Spring4开始有的条件注册的一套快速开发整�
 Spring Boot Starter是一个服务于特定功能并处理好依赖关系的库集合，可直接引入使用。
 
 ## Spring Boot 自动装配的原理
-
-### 什么是Spring Boot 自动装配
-
-自动装配可以简单的理解为：**通过注解或者一些简单的配置就能在Spring Boot的帮助下实现某块功能**。
-
-### Spring Boot是如何实现自动装配的
-
+### 简短说明
+Spring Boot通过`@EnableAutoConfiguration`开启自动装配，通过`SpringFactoriesLoader`最终加载`META-INF/spring.factories`中的自动配置类实现自动装配，自动配置类其实就是通过`@Conditional`按需加载的配置类，想要其生效必须引入`spring-boot-starter-xxx`包实现起步依赖。
+### 详细说明
 1. 对在main函数里调用了`SpringApplication.run()`的`XXX`class解析其注解识别`@SpringBootApplication`。
 2. 根据`@SpringBootApplication`里包含的三个注解`@SpringBootConfiguration`、`@EnableAutoConfiguration`、`@ComponentScan`进行深度解析。
     1. `@Configuration`：允许在上下文中注册额外的bean或导入其他配置类
@@ -30,44 +24,3 @@ Spring Boot Starter是一个服务于特定功能并处理好依赖关系的库�
                 2. 获取`EnableAutoConfiguration`注解中的`exclude`和`excludeName`。
                 3. 获取需要自动装配的所有配置类，读取所有Spring Boot Starter下的`META-INF/spring.factories`
                 4. 根据配置类的注解`@ConditionalOnXXX`进行筛选，只注册满足条件的。
-
-```java
-// selectImports源码
-private static final String[] NO_IMPORTS = new String[0];
-
-public String[] selectImports(AnnotationMetadata annotationMetadata) {
-        // <1>.判断自动装配开关是否打开
-        if (!this.isEnabled(annotationMetadata)) {
-            return NO_IMPORTS;
-        } else {
-          //<2>.获取所有需要装配的bean
-            AutoConfigurationMetadata autoConfigurationMetadata = AutoConfigurationMetadataLoader.loadMetadata(this.beanClassLoader);
-            AutoConfigurationImportSelector.AutoConfigurationEntry autoConfigurationEntry = this.getAutoConfigurationEntry(autoConfigurationMetadata, annotationMetadata);
-            return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
-        }
-    }
-```
-![getAutoConfigurationEntry()方法调用链](_v_images/20210309163124816_14301.png)
-
-```java
-// getAutoConfigurationEntry()源码
-AutoConfigurationEntry getAutoConfigurationEntry(AutoConfigurationMetadata autoConfigurationMetadata, AnnotationMetadata annotationMetadata) {
-        //<1>.
-        if (!this.isEnabled(annotationMetadata)) {
-            return EMPTY_ENTRY;
-        } else {
-            //<2>.
-            AnnotationAttributes attributes = this.getAttributes(annotationMetadata);
-            //<3>.
-            List<String> configurations = this.getCandidateConfigurations(annotationMetadata, attributes);
-            //<4>.
-            configurations = this.removeDuplicates(configurations);
-            Set<String> exclusions = this.getExclusions(annotationMetadata, attributes);
-            this.checkExcludedClasses(configurations, exclusions);
-            configurations.removeAll(exclusions);
-            configurations = this.filter(configurations, autoConfigurationMetadata);
-            this.fireAutoConfigurationImportEvents(configurations, exclusions);
-            return new AutoConfigurationImportSelector.AutoConfigurationEntry(configurations, exclusions);
-        }
-    }
-```

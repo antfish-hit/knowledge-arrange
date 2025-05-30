@@ -23,6 +23,9 @@
         },
         {
             "name": "algorithm"
+        },
+        {
+            "name": "tool"
         }
     ],
     "id": "2",
